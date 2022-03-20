@@ -1,0 +1,51 @@
+.image-name-product {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    column-gap: 0.5em;
+    min-width: 150px;
+}
+
+.quantity-product {
+    vertical-align: middle;
+    border: solid 1px rgb(226, 226, 226);
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin: 0 0.5em;
+}
+
+.price-unit-product, .quantity-product-btns, .price-total-product, .remove-product {
+    vertical-align: middle;
+}
+
+.quantity-product-btns {
+    min-width: 150px;
+}
+
+tr .btn {
+    line-height: 0.9;
+    padding: 0.25em 0.5em;
+}
+
+.remove-product button {
+    background: none;
+    border: none;
+}
+
+.remove-product button:hover {
+    color:rgb(7, 7, 7);
+}
+
+.bi-trash {
+    color: rgb(104, 103, 103);
+}
+
+.bi-trash:hover {
+    color:rgb(7, 7, 7);
+}
+
+@media screen and (max-width: 468px) {
+    .image-name-product {
+        flex-direction: column;
+    }
+}

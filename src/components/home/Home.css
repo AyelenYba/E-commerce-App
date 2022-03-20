@@ -1,0 +1,51 @@
+.main-container {
+    height: 100%;
+    width: 100%;
+}
+
+.shopnow-container {
+    margin:5em 0;
+    height: 600px;
+    background-color: rgb(230, 199, 204);
+    background-image: url(../../assets/shopnow.png);
+    background-size: contain;
+}
+
+.shopnow-btn {
+    background-color: rgba(203, 56, 216, 0.425);
+    border: 2px solid rgb(7,7,7);
+    border-radius: 8px;
+    padding: 0 1em;
+    cursor: pointer;
+    height: 2em;
+    font-size: 2em;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.shopnow-btn a {
+    text-decoration: none;
+    color: rgba(7,7,7);
+}
+
+.shopnow-btn a:hover {
+    color: rgba(7,7,7);
+}
+
+.shopnow-btn:hover {
+    box-shadow: 8px 8px 0px rgb(157, 31, 173);
+    transform: translateX(-3px);
+    background-color: rgba(201, 113, 241, 0.76);
+}
+
+@media screen and (min-width: 1441px) {
+    .shopnow-container { 
+        height: 900px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .shopnow-container {
+        margin: 1em 0;
+    }
+}

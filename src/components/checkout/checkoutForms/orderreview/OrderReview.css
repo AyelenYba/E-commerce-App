@@ -1,0 +1,28 @@
+.order-review-container {
+    width: 40%;
+}
+
+@media  screen and (max-width: 575px) {
+    .order-review-container {
+        max-width: 90%;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .order-review-container {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+    .order-review-container {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+    .order-review-container {
+        width: 50%;
+    }
+}

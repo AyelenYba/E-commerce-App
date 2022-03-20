@@ -1,0 +1,46 @@
+.navbar-nav {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.navbar-brand a {
+    color: rgb(179, 39, 197) !important;
+    font-weight: bold;
+    padding-top: 0;
+}
+
+.cart-btn {
+    text-align: right;
+    width: 100%;
+}
+
+.bi-cart-fill {
+    color: rgb(177, 174, 174);
+    font-size: 1.3em;
+    transition: all 0.2s ease-in-out;
+}
+
+.bi-cart-fill:hover {
+    color: rgb(216, 211, 211);
+}
+
+.total-items {
+    color:white;
+    font-size: 0.55em;
+    font-weight: bold;
+    font-style: normal;
+    background-color: rgb(157, 31, 173);
+    position: relative; 
+    border-radius: 50%;
+    padding: 0.3em 0.6em;
+    bottom: 1em;
+    right: 0.5em;
+}
+
+
+@media screen and (max-width: 991px) {
+    .cart-btn {
+        text-align: left;
+    }
+}
