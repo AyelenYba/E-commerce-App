@@ -21,6 +21,7 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
 
     const validationSchema = Yup.object().shape({
         cardnumber: Yup.string()
+        .max(16, "Can't be longer than 16 numbers")
         .matches(regExpCardNumber, 'Invalid card number')
         .required('* The field is required'),
         name: Yup.string()
