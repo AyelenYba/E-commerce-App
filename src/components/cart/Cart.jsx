@@ -40,7 +40,7 @@ const Cart = ({ cart, handleEmptyCart, handleRemoveFromCart, handleUpdateCartQty
     );
 
     return (
-        <Container className='my-5 cart' style={{ height: '100vh'}} >
+        <Container className='cart' style={{ height: '100vh', marginTop: '7.5em'}} >
                 <h4>Shopping Cart</h4>
                 { renderEmptyMessage() }
                 <Table responsive="md">

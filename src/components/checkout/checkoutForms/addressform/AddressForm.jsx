@@ -1,163 +1,168 @@
 import React from 'react';
 import { Container, Button, Form, Row, Nav, Col, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import './AddressForm.css';
 
 const AddressForm = ({ setStep }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const regExpFirstName = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/;
+    const regExpLastName = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/;
+    const regExpEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const regExpAddress = /^[A-Za-z0-9éíóúýÁÉÍÓÚÝ\s]+$/;
+    const regExpCity = /^[a-zA-Z\u0080-\u024F]+(?:. |-| |')*([1-9a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
+    const regExpPostalCode = /^[0-9a-zA-Z]+$/;
 
-    const onSubmit = (data) => {
-        console.log(data); 
-        setStep(1);
-    };
+    const validationSchema = Yup.object().shape({
+        firstname: Yup.string()
+        .min(3, 'Must be at least 3 characters long')
+        .matches(regExpFirstName, 'Invalid first name')
+        .required('* The field is required'),
+        lastname: Yup.string()
+        .min(3, 'Must be at least 3 characters long')
+        .matches(regExpLastName, 'Invalid last name')
+        .required('* The field is required'),
+        email: Yup.string()
+        .required('* The field is required')
+        .matches(regExpEmail, 'Invalid email'),
+        address: Yup.string()
+        .matches(regExpAddress, 'Invalid address')
+        .required('* The field is required'),
+        city: Yup.string()
+        .matches(regExpCity, 'Invalid city')
+        .required('* The field is required'),
+        postalcode: Yup.string()
+        .matches(regExpPostalCode, 'Invalid postal code')
+        .required('* The field is required'),
+    });
+    
 
     return (
         <Container id='address-form-container mb-5'>
             <h5>Shipping Details</h5>
+            <Formik 
+            initialValues={{ firstname:"", lastname:"", email:"", address:"", city:"", postalcode:""}} 
+            validationSchema={validationSchema}
+            onSubmit={(values, {setSubmitting, resetForm}) => {
+                setSubmitting(true); //Button disabled while submitting
+                setStep(1);
+                // Sets setSubmitting to false after form is reset
+                setSubmitting(false);
+        }}>
+            {( {values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting }) => (
             <Form 
             className='address-form d-flex align-items-center flex-column my-5' 
             style={{ height: '100vh'}}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit}
             >
                 <Row className='d-flex justify-content-center' style={{ width: '100%'}}>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formFirstName'>
                             <FormLabel>First Name</FormLabel>
                             <FormControl
                             type='text'
                             name='firstname'
                             placeholder='First name'
-                                {...register('firstname', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/,
-                                        message: 'Invalid first name'
-                                    }
-                                })}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.firstname}
+                            className={touched.firstname && errors.firstname ? "error" : null}
                             >
                             </FormControl>
-                        {errors.firstname && <span>{errors.firstname.message}</span>}
+                            {touched.firstname && errors.firstname && <span className="error-message">{errors.firstname}</span>}
                         </FormGroup>
                     </Col>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formLastName'>
                             <FormLabel>Last Name</FormLabel>
                             <FormControl
                             type='text'
                             name='lastname'
                             placeholder='Last name'
-                                {...register('lastname', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/,
-                                        message: 'Invalid last name'
-                                    }
-                                })}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.lastname}
+                            className={touched.lastname && errors.lastname ? "error" : null}
                             >
                             </FormControl>
                         </FormGroup>
-                        {errors.lastname && <span>{errors.lastname.message}</span>}
+                        {touched.lastname && errors.lastname && <span className="error-message">{errors.lastname}</span>}
                     </Col>
                 </Row>
                 <Row className='d-flex justify-content-center' style={{ width: '100%'}}>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formEmail'>
                             <FormLabel>Email</FormLabel>
                             <FormControl
                             type='text'
                             name='email'
                             placeholder='Email'
-                                {...register('email', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                                        message: 'Invalid email address'
-                                    }
-                                })}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            className={touched.email && errors.email ? "error" : null}
                             >
                             </FormControl>
                         </FormGroup>
-                        {errors.email && <span>{errors.email.message}</span>}
+                        {touched.email && errors.email && <span className="error-message">{errors.email}</span>}
                     </Col>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formAddress'>
                             <FormLabel>Address</FormLabel>
                             <FormControl
                             type='text'
                             name='address'
                             placeholder='Address'
-                                {...register('address', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^[A-Za-z0-9éíóúýÁÉÍÓÚÝ\s]+$/g,
-                                        message: 'Invalid address'
-                                    }
-                                })}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.address}
+                            className={touched.address && errors.address ? "error" : null}
                             >
                             </FormControl>
                         </FormGroup>
-                        {errors.address && <span>{errors.address.message}</span>}
+                        {touched.address && errors.address && <span className="error-message">{errors.address}</span>}
                     </Col>
                 </Row>
                 <Row className='d-flex justify-content-center' style={{ width: '100%'}}>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formCity'>
                             <FormLabel>City</FormLabel>
                             <FormControl
                             type='text'
                             name='city'
                             placeholder='City'
-                                {...register('city', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Z\u0080-\u024F]+(?:. |-| |')*([1-9a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/,
-                                        message: 'Invalid city'
-                                    }
-                                })}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.city}
+                            className={touched.city && errors.city ? "error" : null}
                             >
                             </FormControl>
                         </FormGroup>
-                        {errors.city && <span>{errors.city.message}</span>}
+                        {touched.city && errors.city && <span className="error-message">{errors.city}</span>}
                     </Col>
                     <Col xs={12} sm={10} md={6} lg={4} className="mb-4">
-                        <FormGroup as={Col}>
+                        <FormGroup as={Col} controlId='formPostalCode'>
                             <FormLabel>Postal Code</FormLabel>
                             <FormControl
                             type='text'
                             name='postalcode'
                             placeholder='Postal Code'
-                                {...register('postalcode', {
-                                    required: {
-                                        value: true,
-                                        message: 'The field is required'
-                                    },
-                                    pattern: {
-                                        value: /^[0-9a-zA-Z]+$/,
-                                        message: 'Invalid postal code'
-                                    }
-                                })}
-                            >
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.postalcode}
+                            className={touched.postalcode && errors.postalcode ? "error" : null}
+                        >
                             </FormControl>
                         </FormGroup>
-                        {errors.postalcode && <span>{errors.postalcode.message}</span>}
+                        {touched.postalcode && errors.postalcode && <span className="error-message">{errors.postalcode}</span>}
                     </Col>
                 </Row>
                 <div className='address-form-footer my-4'>
@@ -166,11 +171,13 @@ const AddressForm = ({ setStep }) => {
                                 <span>Back to cart</span>
                         </Nav.Link>
                     </Button>
-                    <Button className='next-btn ' type="submit" >
+                    <Button className='next-btn ' type='submit' disabled={isSubmitting} >
                         Next
                     </Button>
                 </div>
             </Form>
+            )}
+        </Formik>
         </Container>
     );
 };

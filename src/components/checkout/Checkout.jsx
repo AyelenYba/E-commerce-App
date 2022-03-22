@@ -30,7 +30,7 @@ const Checkout = ({ cart, refreshCart }) => {
     }
 
     return (
-        <Container className='my-5'>
+        <Container style={{marginTop: '7.5em'}}>
             <h4 className='my-4'>Checkout</h4>
             {loading && <Loader />}
             {checkoutToken && step === 0 && <AddressForm setStep={setStep} />}

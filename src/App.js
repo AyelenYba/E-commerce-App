@@ -118,7 +118,7 @@ const App = () => {
                         />
                     } 
                     />
-                    <Route element={<NotFound />}/>
+                    <Route path='/*' element={<NotFound />}/>
                 </Routes>
             </Router>
         </>

@@ -14,7 +14,7 @@ const Menu = ({ totalItems }) => {
     ];
 
     return (
-        <Navbar collapseOnSelect bg='dark' variant='dark' expand='lg' fixed> {/* O fixed='top' */}
+        <Navbar collapseOnSelect bg='dark' variant='dark' expand='lg' fixed='top'>
             <Container >
                 <NavbarBrand >
                     <Nav.Link as={Link} to='/'>

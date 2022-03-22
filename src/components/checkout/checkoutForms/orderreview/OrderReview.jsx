@@ -29,7 +29,6 @@ const OrderReview = ({ checkoutToken }) => {
                     </Row>
                 </ListGroup.Item>
             ))}
-                
                 <Row>
                 <span className='order-total-price my-4' 
                 style={{ 

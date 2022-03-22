@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Button, Col } from 'react-bootstrap';
+import { Form, Row, Button, Col, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik } from 'formik';
 import Swal from 'sweetalert2';
@@ -21,17 +21,18 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
 
     const validationSchema = Yup.object().shape({
         cardnumber: Yup.string()
-        .matches(regExpCardNumber)
+        .matches(regExpCardNumber, 'Invalid card number')
         .required('* The field is required'),
         name: Yup.string()
+        .min(3, 'Must have at least 3 characters')
         .max(24, "Can't be longer than 24 characters")
-        .matches(regExpCardName)
+        .matches(regExpCardName, 'Invalid name')
         .required('* The field is required'),
         expiry: Yup.string()
         .required('* The field is required')
-        .matches(regExpExpiry),
+        .matches(regExpExpiry, 'Invalid expiry date'),
         cvc: Yup.string()
-        .matches(regExpCvc)
+        .matches(regExpCvc, 'Invalid code')
         .required('* The field is required'),
     });
     
@@ -57,8 +58,9 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
             }).then((result) => {
                 if(result.isConfirmed) {
                     window.location.href= '/products'
-                } 
-                window.location.href='/'
+                } else {
+                    window.location.href='/'
+                }
             });
 
             // Sets setSubmitting to false after form is reset
@@ -73,11 +75,11 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
             isSubmitting }) => (
             <Form className='d-flex flex-column  my-5' onSubmit={handleSubmit}>
                 <Col className='d-flex align-items-center flex-column mx-auto payment-form-container'>
-                    <Row >
-                        <Col>
-                            <Form.Group controlId="formCardnumber">
-                            <Form.Label></Form.Label>
-                            <Form.Control
+                    <Row style={{width: '100%'}}>
+                        <Col >
+                            <FormGroup controlId="formCardnumber">
+                            <FormLabel></FormLabel>
+                            <FormControl
                                 type="text"
                                 name="cardnumber"
                                 placeholder="Card Number"
@@ -86,15 +88,15 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
                                 value={values.cardnumber}
                                 className={touched.cardnumber && errors.cardnumber ? "error" : null}
                                 />
-                                {touched.cardnumber && errors.cardnumber && <span className="error-message">Invalid card number</span>}
-                            </Form.Group>
+                                {touched.cardnumber && errors.cardnumber && <span className="error-message">{errors.cardnumber}</span>}
+                            </FormGroup>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{width: '100%'}}>
                         <Col>
-                            <Form.Group controlId="formName">
-                            <Form.Label></Form.Label>
-                            <Form.Control
+                            <FormGroup controlId="formName">
+                            <FormLabel></FormLabel>
+                            <FormControl
                                 type="text"
                                 name="name"
                                 placeholder="Name"
@@ -103,15 +105,15 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
                                 value={values.name}
                                 className={touched.name && errors.name ? "error" : null}
                                 />
-                                {touched.name && errors.name && <span className="error-message">Invalid name</span>}
-                            </Form.Group>
+                                {touched.name && errors.name && <span className="error-message">{errors.name}</span>}
+                            </FormGroup>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{width: '100%'}}>
                         <Col>
-                            <Form.Group controlId="formExpiry">
-                            <Form.Label></Form.Label>
-                            <Form.Control
+                            <FormGroup controlId="formExpiry">
+                            <FormLabel></FormLabel>
+                            <FormControl
                                 type="text"
                                 name="expiry"
                                 placeholder="MM/YY"
@@ -120,13 +122,13 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
                                 value={values.expiry}
                                 className={touched.expiry && errors.expiry ? "error" : null}
                                 />
-                                {touched.expiry && errors.expiry && <span className="error-message">Invalid expiry date</span>}
-                            </Form.Group>
+                                {touched.expiry && errors.expiry && <span className="error-message">{errors.expiry}</span>}
+                            </FormGroup>
                         </Col>
                         <Col>
-                            <Form.Group controlId="formCvc">
-                            <Form.Label></Form.Label>
-                            <Form.Control
+                            <FormGroup controlId="formCvc">
+                            <FormLabel></FormLabel>
+                            <FormControl
                                 type="text"
                                 name="cvc"
                                 placeholder="cvc"
@@ -135,11 +137,11 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
                                 value={values.cvc}
                                 className={touched.cvc && errors.cvc ? "error" : null}
                                 />
-                                {touched.cvc && errors.cvc && <span className="error-message">Invalid code</span>}
-                            </Form.Group>
+                                {touched.cvc && errors.cvc && <span className="error-message">{errors.cvc}</span>}
+                            </FormGroup>
                         </Col>
                     </Row>
-                    <div className='creditcardform-footer my-5'>
+                    <div className='creditcardform-footer my-5' style={{width: '100%'}}>
                         <Button className='back-btn' onClick={onClickHandle}>    
                             <span>Back</span>
                         </Button>

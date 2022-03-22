@@ -1,5 +1,5 @@
 .creditcardform-footer {
-    width: 87%;
+    /* width: 87%; */
     display: flex;
     justify-content: space-between;
 }
@@ -44,8 +44,8 @@
 }
 
 
-@media screen and (min-width: 991px) and (max-width: 1399px) {
+/* @media screen and (min-width: 991px) and (max-width: 1399px) {
     .creditcardform-footer {
         width: 80%;
     }
-}
+} */
