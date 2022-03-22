@@ -14,20 +14,20 @@ const Checkout = ({ cart, refreshCart }) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        const generateToken = async () => {
+            setLoading(true);
+            try {
+                const token = await commerce.checkout.generateToken(cart.id, { type: 'cart'});
+                setCheckoutToken(token);
+            } catch (error) {
+                console.log('There was an error in generating a token', error);
+            } finally {
+                setLoading(false);
+            }
+        }
         generateToken();
     }, []);
 
-    const generateToken = async () => {
-        setLoading(true);
-        try {
-            const token = await commerce.checkout.generateToken(cart.id, { type: 'cart'});
-            setCheckoutToken(token);
-        } catch (error) {
-            console.log('There was an error in generating a token', error);
-        } finally {
-            setLoading(false);
-        }
-    }
 
     return (
         <Container style={{marginTop: '7.5em'}}>
