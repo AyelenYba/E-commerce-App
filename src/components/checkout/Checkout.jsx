@@ -31,7 +31,7 @@ const Checkout = ({ cart, refreshCart }) => {
 
     return (
         <Container className='my-5'>
-            <h4>Checkout</h4>
+            <h4 className='my-4'>Checkout</h4>
             {loading && <Loader />}
             {checkoutToken && step === 0 && <AddressForm setStep={setStep} />}
             {checkoutToken && step === 1 && <PaymentForm setStep={setStep} checkoutToken={checkoutToken} refreshCart={refreshCart}/>}

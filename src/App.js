@@ -7,6 +7,7 @@ import Menu from './components/menu/Menu';
 import { commerce } from './commerce/commerce';
 import Cart from './components/cart/Cart';
 import Checkout from './components/checkout/Checkout';
+import NotFound from './components/notfound/NotFound';
 import './App.css';
 
 const App = () => {
@@ -117,6 +118,7 @@ const App = () => {
                         />
                     } 
                     />
+                    <Route element={<NotFound />}/>
                 </Routes>
             </Router>
         </>

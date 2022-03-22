@@ -3,7 +3,6 @@ import { Container, Button, Form, Row, Nav, Col, FormGroup, FormLabel, FormContr
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-
 import './AddressForm.css';
 
 const AddressForm = ({ setStep }) => {
@@ -14,7 +13,6 @@ const AddressForm = ({ setStep }) => {
         console.log(data); 
         setStep(1);
     };
-
 
     return (
         <Container id='address-form-container mb-5'>
