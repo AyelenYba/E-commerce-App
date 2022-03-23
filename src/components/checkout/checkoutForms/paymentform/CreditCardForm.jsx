@@ -13,7 +13,7 @@ const CreditCardForm = ({ setStep, refreshCart }) => {
         setStep(0);
     }
 
-    const regExpCardNumber = /^4[0-9]{12}(?:[0-9]{3})?$/;  //Only visa 4155279860457”
+    const regExpCardNumber = /^4[0-9]{12}(?:[0-9]{3})?$/;  //Only visa
     const regExpCardName = /^((?:[A-Za-z]+ ?){1,3})$/
     const regExpExpiry = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
     const regExpCvc = /\d{3}/;
