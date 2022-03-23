@@ -18,7 +18,7 @@ const Menu = ({ totalItems }) => {
             <Container >
                 <NavbarBrand >
                     <Nav.Link as={Link} to='/'>
-                        E-commerce
+                        Commerce   <i class="bi bi-shop"></i>
                     </Nav.Link>
                 </NavbarBrand>
                 <NavbarToggle size='sm'/> {/* Burger Menu */}
